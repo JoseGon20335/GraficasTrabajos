@@ -71,9 +71,9 @@ def barycentric(A, B, C, P):
 
     if abs(resul[2]) > 1:
         return (
-            1 - (bary[0] + bary[1]) / bary[2],
-            bary[1] / bary[2],
-            bary[0] / bary[2]
+            1 - (resul[0] + resul[1]) / resul[2],
+            resul[1] / resul[2],
+            resul[0] / resul[2]
         )
     elif(abs(resul[2]) > 1):
         return -1, -1, -1
@@ -96,6 +96,7 @@ class Renderer(object):
 
         self.pixels = [[]]
         self.pixelsZBuffer = [[]]
+        self.light = V3(0, 0, 1)
 
         self.width = 0
         self.height = 0
@@ -181,8 +182,8 @@ class Renderer(object):
                         tA, tC, tD), intensity=intensity)
 
     def glCreateWindow(self, width, height):
-        if (width < 0) or (height < 0):
-            raise Exception('unexpected windows size')
+        # if (width < 0) or (height < 0):
+        #     raise Exception('unexpected windows size')
 
         self.width = width
         self.height = height

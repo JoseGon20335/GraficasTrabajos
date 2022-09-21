@@ -1,3 +1,6 @@
+from utils import *
+
+
 class Obj(object):
     def __init__(self, filename):
         with open(filename) as f:
@@ -5,6 +8,7 @@ class Obj(object):
 
         self.vertices = []
         self.faces = []
+        self.tvertices = []
         self.read()
 
     def read(self):
@@ -17,3 +21,7 @@ class Obj(object):
                 elif prefix == 'f':
                     self.faces.append([list(map(int, face.split('/')))
                                       for face in value.split(' ')])
+                if prefix == 'vt':
+                    vertice = list(map(float, value.split(' ')))
+                    vertice.append(0)
+                    self.tvertices.append(vertice)
