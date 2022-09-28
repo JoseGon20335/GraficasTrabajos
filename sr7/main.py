@@ -18,7 +18,6 @@ def main():
 
     glO.look(V3(0, 0, 10), V3(0, 0, 0), V3(0, 1, 1))
     texture = Texture('./models/figura.bmp')
-    print(texture)
     glO.glLoad('./models/figura.obj', (-1, -3, 0),
                (0.5, 0.5, 0.5), (0, 0, 0), texture=texture)
     glO.glFinish()

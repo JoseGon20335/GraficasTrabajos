@@ -3,10 +3,11 @@ from utils import *
 from obj import Obj
 from collections import namedtuple
 from matrix import *
-from numpy import *
+from numpy import sin, cos, matrix
 
 V2 = namedtuple('Point2D', ['x', 'y'])
 V3 = namedtuple('Point3D', ['x', 'y', 'z'])
+V4 = namedtuple('Point4D', ['x', 'y', 'z', 'w'])
 
 # -------------------------------------------------------------
 # OP
@@ -121,9 +122,9 @@ class Renderer(object):
                 f2 = face[1][0] - 1
                 f3 = face[2][0] - 1
 
-                a = self.transform(model.vertices[f1], translate, scale)
-                b = self.transform(model.vertices[f2], translate, scale)
-                c = self.transform(model.vertices[f3], translate, scale)
+                a = self.transform(model.vertices[f1])
+                b = self.transform(model.vertices[f2])
+                c = self.transform(model.vertices[f3])
 
                 normal = norm(cross(sub(b, a), sub(c, a)))
                 intensity = dot(normal, light)
@@ -150,10 +151,10 @@ class Renderer(object):
                 f4 = face[3][0] - 1
 
                 vertices = [
-                    self.transform(model.vertices[f1], translate, scale),
-                    self.transform(model.vertices[f2], translate, scale),
-                    self.transform(model.vertices[f3], translate, scale),
-                    self.transform(model.vertices[f4], translate, scale)
+                    self.transform(model.vertices[f1]),
+                    self.transform(model.vertices[f2]),
+                    self.transform(model.vertices[f3]),
+                    self.transform(model.vertices[f4])
                 ]
 
                 normal = norm(cross(sub(vertices[0], vertices[1]), sub(
@@ -238,6 +239,7 @@ class Renderer(object):
         f = open(self.filename, 'bw')
 
         f.write(char('B'))
+
         f.write(char('M'))
         f.write(dword(14 + 40 + self.width * self.height * 3))
         f.write(dword(0))
@@ -348,6 +350,7 @@ class Renderer(object):
 
     def triangle(self, A, B, C, color=None, texture=None, texture_coords=(), intensity=1):
         xmin, xmax, ymin, ymax = bbox(A, B, C)
+        xmin, xmax, ymin, ymax = int(xmin), int(xmax), int(ymin), int(ymax)
 
         for x in range(xmin, xmax + 1):
             for y in range(ymin, ymax + 1):
@@ -378,11 +381,20 @@ class Renderer(object):
                 except:
                     pass
 
-    def transform(self, vertex, translate=(0, 0, 0), scale=(1, 1, 1)):
+    def transform(self, vertex):
+        augmentedVertex = V4(vertex[0], vertex[1], vertex[2], 1)
+
+        matrix1 = product_matrix_vector(self.model, augmentedVertex)
+        matrix2 = product_matrix_vector(self.View, matrix1)
+        matrix3 = product_matrix_vector(self.Projection, matrix2)
+        transformedVertex = product_matrix_vector(self.Viewport, matrix3)
+
+        transformedVertex = V4(*transformedVertex)
+
         return V3(
-            round((vertex[0] + translate[0]) * scale[0]),
-            round((vertex[1] + translate[1]) * scale[1]),
-            round((vertex[2] + translate[2]) * scale[2])
+            transformedVertex.x / transformedVertex.w,
+            transformedVertex.y / transformedVertex.w,
+            transformedVertex.z / transformedVertex.w
         )
 
     def look(self, eye, center, up):
