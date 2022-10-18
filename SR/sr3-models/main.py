@@ -10,7 +10,7 @@ def main():
     glO.glCreateWindow(1000, 1000)
     glO.glViewPort(0, 0, 1000, 1000)
 
-    glO.glLoad('./models/archivo.obj', (0, -1.3), (0.45, 0.45))
+    glO.glLoad('./models/objeto.obj', (0, 0.5), (0.05, 0.05))
 
     glO.glFinish()
 
