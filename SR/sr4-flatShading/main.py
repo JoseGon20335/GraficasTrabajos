@@ -10,7 +10,7 @@ def main():
     glO.glCreateWindow(800, 800)
     glO.glViewPort(0, 0, 800, 800)
 
-    glO.glLoad('./models/archivo.obj', (0, -50, 0), (10, 10, 10))
+    glO.glLoad('./models/TIE.obj', (0, -50, 0), (10, 10, 10))
 
     glO.glFinish()
     glO.zBuffer()
