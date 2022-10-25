@@ -23,5 +23,6 @@ class Obj(object):
                                       for face in value.split(' ')])
                 if prefix == 'vt':
                     vertice = list(map(float, value.split(' ')))
-                    vertice.append(0)
+                    if(len(vertice) == 2):
+                        vertice.append(0)
                     self.tvertices.append(vertice)

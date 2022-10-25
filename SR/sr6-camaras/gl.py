@@ -121,7 +121,7 @@ class Renderer(object):
                 f1 = face[0][0] - 1
                 f2 = face[1][0] - 1
                 f3 = face[2][0] - 1
-
+                print('---')
                 a = self.transform(model.vertices[f1])
                 b = self.transform(model.vertices[f2])
                 c = self.transform(model.vertices[f3])
@@ -138,6 +138,7 @@ class Renderer(object):
                     t1 = face[0][1] - 1
                     t2 = face[1][1] - 1
                     t3 = face[2][1] - 1
+                    print('---')
                     tA = V3(*model.tvertices[t1])
                     tB = V3(*model.tvertices[t2])
                     tC = V3(*model.tvertices[t3])
@@ -175,6 +176,7 @@ class Renderer(object):
                     t2 = face[1][1] - 1
                     t3 = face[2][1] - 1
                     t4 = face[3][1] - 1
+                    print('---')
                     tA = V3(*model.tvertices[t1])
                     tB = V3(*model.tvertices[t2])
                     tC = V3(*model.tvertices[t3])
