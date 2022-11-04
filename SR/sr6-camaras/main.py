@@ -14,17 +14,24 @@ def main():
     glO.glColor(1, 1, 1)
     glO.glClearColor(0, 0, 0)
     glO.glCreateWindow(800, 800)
-    glO.glViewPort(0, 0, 500, 500)
+    glO.glViewPort(0, 0, 800, 800)
 
-    glO.look(V3(0, 0, 5), V3(0, 0, 2), V3(0, 1, 1))
+    # medium angel
+    # glO.look(V3(0, -0, 40), V3(0, -2, 3), V3(0, 9, 9))
+    # texture = Texture('./models/mo.bmp')
+    # glO.glLoad('./models/mo.obj', (-1, -3, 0),
+    #            (0.5, 0.5, 0.5), (0, 0, 0), texture=texture)
+
+    # low angel
+    # glO.look(V3(0, 0, 40), V3(0, -3, 3), V3(0, 9, 9))
+    # texture = Texture('./models/mo.bmp')
+    # glO.glLoad('./models/mo.obj', (-1, -3, 0),
+    #            (0.5, 0.5, 0.5), (0, 0, 0), texture=texture)
+
+    glO.look(V3(0, 0, 40), V3(0, -2, 3), V3(0, 9, 9))
     texture = Texture('./models/mo.bmp')
     glO.glLoad('./models/mo.obj', (-1, -3, 0),
                (0.5, 0.5, 0.5), (0, 0, 0), texture=texture)
-
-    # glO.look(V3(0, 0, 5), V3(0, 0, 2), V3(0, 1, 1))
-    # texture = Texture('./models/xwing.bmp')
-    # glO.glLoad('./models/xwing.obj', (-1, -3, 0),
-    #            (0.5, 0.5, 0.5), (0, 0, 0), texture=texture)
 
     glO.glFinish()
 
