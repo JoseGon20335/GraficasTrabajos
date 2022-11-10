@@ -28,7 +28,7 @@ def main():
     # glO.glLoad('./models/mo.obj', (-1, -3, 0),
     #            (0.5, 0.5, 0.5), (0, 0, 0), texture=texture)
 
-    glO.look(V3(0, 0, 40), V3(0, -2, 3), V3(0, 9, 9))
+    glO.look(V3(0, 0, 40), V3(0, -1, 3), V3(0, 9, 9))
     texture = Texture('./models/mo.bmp')
     glO.glLoad('./models/mo.obj', (-1, -3, 0),
                (0.5, 0.5, 0.5), (0, 0, 0), texture=texture)
