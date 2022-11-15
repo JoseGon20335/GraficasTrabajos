@@ -1,5 +1,7 @@
 import ray
 
+# falta arreglar
+
 
 def main():
     r = ray.RayT(800, 800)
