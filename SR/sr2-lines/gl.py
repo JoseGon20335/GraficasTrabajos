@@ -1,5 +1,4 @@
 from utils import *
-from obj import Obj
 
 
 class Renderer(object):
