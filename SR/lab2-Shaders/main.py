@@ -19,6 +19,9 @@ def main():
     glO.glLoad('./models/sphere.obj', (-1, -1, 0),
                (1.2, 1.2, 1.5), (0, 0, 0), shader="sphere")
 
+    glO.glLoad('./models/sphereSmol.obj', (-0.6, -1.2, 0),
+               (0.2, 0.2, 0.2), (0, 0, 0), shader="sphereSmol")
+
     glO.glFinish()
 
 

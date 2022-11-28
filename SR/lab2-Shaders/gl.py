@@ -13,8 +13,10 @@ V4 = namedtuple('Point4D', ['x', 'y', 'z', 'w'])
 
 BLACK = 0, 0, 0
 MELON = 222, 195, 136
-BROWN = 170, 145, 105
-LAVENDER = 164, 152, 156
+BROWN = 219, 193, 161
+SNOW = 255, 250, 250
+VANILLA = 229, 220, 208
+ORANGE = 220, 176, 123
 
 # -------------------------------------------------------------
 # OP
@@ -564,54 +566,103 @@ class Renderer(object):
 
             if(render.active_shader == "sphere"):
 
-                if y < 0 and y <= 80:
-                    r1, g1, b1 = MELON
-                    r2, g2, b2 = BROWN
-                    percentage = abs(y - (-50))
-
                 if y < 80 or y >= 120:
-                    r1, g1, b1 = MELON
+                    r1, g1, b1 = BROWN
                     r2, g2, b2 = BROWN
                     percentage = abs(y - (-150))
 
                 if (y < -120 and y >= -170):
-                    r1, g1, b1 = MELON
+                    r1, g1, b1 = VANILLA
                     r2, g2, b2 = BROWN
                     percentage = abs(y - (-200))
 
                 if (y < -170 and y >= -220):
-                    r1, g1, b1 = BROWN
-                    r2, g2, b2 = LAVENDER
+                    r1, g1, b1 = VANILLA
+                    r2, g2, b2 = VANILLA
                     percentage = abs(y - (-200))
 
-                if (y < -220):
-                    r1, g1, b1 = LAVENDER
-                    r2, g2, b2 = LAVENDER
-                    percentage = abs(y - (-150))
-
                 if y >= 0 and y <= 80:
-                    r1, g1, b1 = MELON
-                    r2, g2, b2 = BROWN
+                    r1, g1, b1 = VANILLA
+                    r2, g2, b2 = VANILLA
                     percentage = abs(y - 150)
 
                 if (y > 80 and y < 120):
-                    r1, g1, b1 = MELON
-                    r2, g2, b2 = BROWN
+                    r1, g1, b1 = ORANGE
+                    r2, g2, b2 = ORANGE
                     percentage = abs(y - 150)
 
                 if (y >= 120 and y < 170):
-                    r1, g1, b1 = MELON
-                    r2, g2, b2 = BROWN
+                    r1, g1, b1 = ORANGE
+                    r2, g2, b2 = VANILLA
                     percentage = abs(y - 150)
 
                 if (y >= 170 and y < 220):
                     r1, g1, b1 = BROWN
-                    r2, g2, b2 = LAVENDER
+                    r2, g2, b2 = BROWN
                     percentage = abs(y - 200)
 
                 if (y >= 220):
-                    r1, g1, b1 = LAVENDER
-                    r2, g2, b2 = LAVENDER
+                    r1, g1, b1 = BROWN
+                    r2, g2, b2 = BROWN
+                    percentage = abs(y - 150)
+
+                # Gradient Function
+                percentage = (percentage / 50)
+                r = r1 + percentage * (r2 - r1)
+                g = g1 + percentage * (g2 - g1)
+                b = b1 + percentage * (b2 - b1)
+                shader_color = r, g, b
+
+                # Saturn gradient lines
+                if (y % 40) in range(0, 14):
+                    r, g, b = shader_color
+                    r *= 0.98
+                    g *= 0.98
+                    b *= 0.98
+                    shader_color = r, g, b
+
+                return color(r, g, b)
+
+            if(render.active_shader == "sphereSmol"):
+
+                if y < 80 or y >= 120:
+                    r1, g1, b1 = ORANGE
+                    r2, g2, b2 = ORANGE
+                    percentage = abs(y - (-150))
+
+                if (y < -120 and y >= -170):
+                    r1, g1, b1 = ORANGE
+                    r2, g2, b2 = ORANGE
+                    percentage = abs(y - (-200))
+
+                if (y < -170 and y >= -220):
+                    r1, g1, b1 = ORANGE
+                    r2, g2, b2 = ORANGE
+                    percentage = abs(y - (-200))
+
+                if y >= 0 and y <= 80:
+                    r1, g1, b1 = ORANGE
+                    r2, g2, b2 = ORANGE
+                    percentage = abs(y - 150)
+
+                if (y > 80 and y < 120):
+                    r1, g1, b1 = ORANGE
+                    r2, g2, b2 = ORANGE
+                    percentage = abs(y - 150)
+
+                if (y >= 120 and y < 170):
+                    r1, g1, b1 = ORANGE
+                    r2, g2, b2 = ORANGE
+                    percentage = abs(y - 150)
+
+                if (y >= 170 and y < 220):
+                    r1, g1, b1 = ORANGE
+                    r2, g2, b2 = ORANGE
+                    percentage = abs(y - 200)
+
+                if (y >= 220):
+                    r1, g1, b1 = ORANGE
+                    r2, g2, b2 = ORANGE
                     percentage = abs(y - 150)
 
                 # Gradient Function
