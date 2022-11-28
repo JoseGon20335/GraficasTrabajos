@@ -9,7 +9,7 @@ def main():
     r.point(100, 100)
     r.render()
 
-    r.write('r.bmp')
+    r.write()
 
 
 main()

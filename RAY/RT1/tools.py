@@ -142,7 +142,8 @@ def color(r, g, b):
     return bytes([int(b), int(g), int(r)])
 
 
-def createBmp(filename, width, height, pixels):
+def createBmp(width, height, pixels):
+    filename = "result.bmp"
     f = open(filename, 'bw')
 
     f.write(char('B'))
