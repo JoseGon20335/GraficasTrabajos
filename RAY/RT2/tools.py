@@ -116,11 +116,12 @@ def norm(v0):
     )
 
 
-def bbox(A, B, C):
-    xs = [A.x, B.x, C.x]
+def bbox(*vertices):
+    xs = [vertex.x for vertex in vertices]
+    ys = [vertex.y for vertex in vertices]
     xs.sort()
-    ys = [A.y, B.y, C.y]
     ys.sort()
+
     return V2(int(xs[0]), int(ys[0])), V2(int(xs[-1]), int(ys[-1]))
 
 
@@ -132,12 +133,12 @@ def barycentric(A, B, C, P):
 
     if abs(resul.z) < 1:
         return (-1, -1, -1)
-    else:
-        return (
-            1 - (resul.x + resul.y) / resul.z,
-            resul.y / resul.z,
-            resul.x / resul.z
-        )
+
+    return (
+        1 - (resul.x + resul.y) / resul.z,
+        resul.y / resul.z,
+        resul.x / resul.z
+    )
 
 
 def allbarycentric(A, B, C, bbox_min, bbox_max):
@@ -165,14 +166,13 @@ def dword(d):
 
 
 def color(r, g, b):
-    return bytes([int(b), int(g), int(r)])
+    return bytes([b, g, r])
 
 
-def createBmp(filename, width, height, pixels):
-    f = open(filename, 'bw')
+def createBmp(width, height, pixels):
+    f = open('result.bmp', 'bw')
 
     f.write(char('B'))
-
     f.write(char('M'))
     f.write(dword(14 + 40 + width * height * 3))
     f.write(dword(0))
@@ -190,8 +190,8 @@ def createBmp(filename, width, height, pixels):
     f.write(dword(0))
     f.write(dword(0))
 
-    for x in range(width):
-        for y in range(height):
+    for x in range(height):
+        for y in range(width):
             f.write(pixels[x][y].toBytes())
     f.close()
 

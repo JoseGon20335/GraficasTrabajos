@@ -24,8 +24,8 @@ class RayT (object):
         if y >= 0 and y < self.height and x >= 0 and x < self.width:
             self.framebuffer[y][x] = color or self.current_color
 
-    def write(self, filename):
-        createBmp(filename, self.width, self.height, self.framebuffer)
+    def write(self):
+        createBmp(self.width, self.height, self.framebuffer)
 
     # rayo inifinitio
     def cast_ray(self, origin, direction):
